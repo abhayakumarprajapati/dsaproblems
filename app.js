@@ -1,7 +1,8 @@
-const { maxSubarray } = require("./problems")
+const { maxSubarray, threesumClosest } = require("./problems")
 
 
-maxSubarray()
+// maxSubarray()
+threesumClosest()
 
 
 

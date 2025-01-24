@@ -24,3 +24,51 @@ exports.maxSubarray = () => {
     console.log(maxsubarr())
 
 }
+
+exports.threesumClosest = () => {
+
+    const task = (arr, target) => {
+
+        arr.sort((a, b) => a - b)
+        let closestsum = Infinity;
+        let n = arr.length;
+
+        for (let i = 0; i < n - 2; i++) {
+
+            let left = i + 1;
+            let right = n - 1;
+
+
+
+            while (left < right) {
+                let currensum = arr[i] + left + right;
+
+                if (Math.abs(target - currensum) < Math.abs(target - closestsum)) {
+                    closestsum = currensum;
+                }
+
+                // Move pointers
+                if (currensum < target) {
+                    left++; // Need a larger sum
+                } else if (currensum > target) {
+                    right--; // Need a smaller sum
+                } else {
+                    // Exact match found
+                    return currensum;
+                }
+
+
+            }
+
+
+
+        }
+
+        return closestsum
+
+    }
+
+    // console.log(task(nums = [-1, 2, 1, -4], target = 1))
+    console.log(task(nums = [0, 0, 0], target = 1))
+
+}

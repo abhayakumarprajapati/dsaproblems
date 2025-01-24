@@ -41,7 +41,7 @@ exports.threesumClosest = () => {
 
 
             while (left < right) {
-                let currensum = arr[i] + left + right;
+                let currensum = arr[i] + arr[left] + arr[right];
 
                 if (Math.abs(target - currensum) < Math.abs(target - closestsum)) {
                     closestsum = currensum;
@@ -68,7 +68,7 @@ exports.threesumClosest = () => {
 
     }
 
-    // console.log(task(nums = [-1, 2, 1, -4], target = 1))
-    console.log(task(nums = [0, 0, 0], target = 1))
+    console.log(task(nums = [-1, 2, 1, -4], target = 1))
+    // console.log(task(nums = [0, 0, 0], target = 1))
 
 }

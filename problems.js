@@ -89,7 +89,7 @@ exports.removeDuplicates = () => {
 
         }
 
-       
+
 
         return slow + 1;
 
@@ -219,4 +219,17 @@ exports.pairSumProblem = () => {
     //Output: (1, 3)
     console.log(task())
 
+}
+
+//8. Longest Substring Without Repeating Characters
+
+exports.longesubstringWithoutRepeaCh = () => {
+    const task = () => {
+
+    }
+
+    // Input: s = "abcabcbb"
+    //Output: 3 (substring: "abc")
+
+    console.log(task())
 }

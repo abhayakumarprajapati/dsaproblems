@@ -1,12 +1,15 @@
-const { maxSubarray, threesumClosest, removeDuplicates, subArrwithGivensum, tripletsumProb, pairSumProblem } = require("./problems")
+const { maxSubarray, threesumClosest, removeDuplicates, subArrwithGivensum, tripletsumProb, pairSumProblem, longesubstringWithoutRepeaCh, minWindowSubstring, smallestSub } = require("./problems")
 
 
 // maxSubarray()
 // threesumClosest()
-removeDuplicates()
+// removeDuplicates()
 // subArrwithGivensum()
 // tripletsumProb()
 // pairSumProblem()
+// longesubstringWithoutRepeaCh()
+// minWindowSubstring()
+smallestSub()
 
 
 

@@ -4,7 +4,7 @@ exports.maxSubarray = () => {
 
         // let arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
         // let arr = [1];
-        let arr = [5, 4, -1, 7, 8];
+        let arr = [5, 4, -1, 17, 8];
         let currentsum = 0;
         let maxsum = -Infinity;
 
@@ -142,49 +142,46 @@ exports.subArrwithGivensum = () => {
 }
 
 exports.tripletsumProb = () => {
-
     const task_1 = () => {
-
         let arr = [-1, 0, 1, 2, -1, -4];
         let target = 0;
 
         arr.sort((a, b) => a - b);
-        let result = []
-        let count = 0;
+        let result = [];
 
-        for (let i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length - 2; i++) {
+            // Skip duplicates for the first element of the triplet
+            if (i > 0 && arr[i] === arr[i - 1]) continue;
 
             let start = i + 1;
             let end = arr.length - 1;
 
-
             while (start < end) {
-                let currensum = arr[i] + arr[start] + arr[end];
-                if (currensum === target) {
-                    // result.push(arr.slice(start, end + 1))
-                    count++;
-                    result.push([arr[i], arr[start], arr[end]])
-                    break;
-                } else if (currensum < target) {
+                let currSum = arr[i] + arr[start] + arr[end];
+
+                if (currSum === target) {
+                    result.push([arr[i], arr[start], arr[end]]);
+
+                    // Skip duplicates for the second and third elements
+                    while (start < end && arr[start] === arr[start + 1]) start++;
+                    while (start < end && arr[end] === arr[end - 1]) end--;
+
+                    // Move both pointers to find the next unique triplet
+                    start++;
+                    end--;
+                } else if (currSum < target) {
                     start++;
                 } else {
                     end--;
                 }
-
-
             }
-
         }
-
         return result;
+    };
 
-    }
-    // Input: arr = [-1, 0, 1, 2, -1, -4], target = 0
-    // Output: [[-1, -1, 2], [-1, 0, 1]]
-    // console.log('fj')
-    console.log(task_1())
+    console.log(task_1());
+};
 
-}
 
 exports.pairSumProblem = () => {
 
@@ -224,12 +221,158 @@ exports.pairSumProblem = () => {
 //8. Longest Substring Without Repeating Characters
 
 exports.longesubstringWithoutRepeaCh = () => {
-    const task = () => {
+    function lengthOfLongestSubstring(s) {
+        let charSet = new Set();
+        let start = 0, maxLength = 0;
 
+        for (let end = 0; end < s.length; end++) {
+            // If character already in set, remove characters from start
+            while (charSet.has(s[end])) {
+                charSet.delete(s[start]);
+                start++;
+            }
+
+            // Add current character to set and update maxLength
+            charSet.add(s[end]);
+            maxLength = Math.max(maxLength, end - start + 1);
+        }
+
+        return maxLength;
     }
 
-    // Input: s = "abcabcbb"
-    //Output: 3 (substring: "abc")
+    // Example usage:
+    // const s = "abcabcdbb";
+    const s = "abcbbabcde";
+    console.log(lengthOfLongestSubstring(s)); // Output: 3 (Substring: "abc")
+
+}
+
+//Problem: Minimum Window Substring
+
+exports.minWindowSubstring = () => {
+
+    function minWindow(s, t) {
+        if (t.length > s.length) return "";
+
+        // Frequency map for t
+        const tFreq = new Map();
+        for (const char of t) {
+            tFreq.set(char, (tFreq.get(char) || 0) + 1);
+        }
+
+        // Sliding window variables
+        let start = 0, end = 0;
+        let windowFreq = new Map();
+        let minLength = Infinity, minStart = 0;
+        let formed = 0, required = tFreq.size;
+
+        while (end < s.length) {
+            // Add character at `end` to the window
+            const char = s[end];
+            windowFreq.set(char, (windowFreq.get(char) || 0) + 1);
+
+            // If the frequency matches, increment `formed`
+            console.log("windowFreq.get(char)", windowFreq.get(char))
+            console.log("tFreq.get(char)", tFreq.get(char))
+
+            if (tFreq.has(char) && windowFreq.get(char) === tFreq.get(char)) {
+                formed++;
+            }
+
+            // Shrink the window from the left if valid
+            while (formed === required) {
+                const currentLength = end - start + 1;
+                if (currentLength < minLength) {
+                    minLength = currentLength;
+                    minStart = start;
+                }
+
+                const startChar = s[start];
+                windowFreq.set(startChar, windowFreq.get(startChar) - 1);
+
+                if (tFreq.has(startChar) && windowFreq.get(startChar) < tFreq.get(startChar)) {
+                    formed--;
+                }
+
+                start++;
+            }
+
+            // Expand the window
+            end++;
+        }
+
+        return minLength === Infinity ? "" : s.substring(minStart, minStart + minLength);
+    }
+
+    // Example usage
+    const s = "ADOBECODEBANC";
+    const t = "ABC";
+    console.log(minWindow(s, t)); // Output: "BANC"
+
+
+}
+
+
+//Maximum Sum Subarray of Size K
+//Input: arr = [2, 1, 5, 1, 3, 2], k = 3
+//Output: 9
+
+exports.maxsubArrofSizeK = () => {
+
+    const task = () => {
+        let arr = [2, 1, 5, 1, 3, 2];
+        let k = 3;
+
+        let maxSum = -Infinity;
+        let currentSum = 0;
+        let start = 0;
+
+        for (let end = 0; end < arr.length; end++) {
+            currentSum += arr[end]; // Add the next element to the window
+
+            if (end >= k - 1) { // When window reaches size k
+                maxSum = Math.max(maxSum, currentSum);
+                currentSum -= arr[start]; // Remove the leftmost element
+                start++; // Slide the window forward
+            }
+        }
+
+        return maxSum;
+    };
+
+    console.log(task());
+
+
+}
+
+//Smallest Subarray with Sum ≥ S
+exports.smallestSub = () => {
+
+    const task = () => {
+
+        let arr = [2, 1, 5, 2, 3, 2];
+        let S = 7;
+
+        let currentsum = 0;
+        let minlen = Infinity;
+        let start = 0;
+
+        for (let end = 0; end < arr.length; end++) {
+
+            currentsum = currentsum + arr[end];
+
+            while (currentsum >= S) {
+                minlen = Math.min(minlen, end - start + 1);
+                currentsum = currentsum - arr[start];
+                start++;
+
+            }
+
+        }
+
+        return minlen == Infinity ? 0 : minlen;
+
+    }
 
     console.log(task())
 }

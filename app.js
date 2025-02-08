@@ -1,4 +1,10 @@
-const { maxSubarray, threesumClosest, removeDuplicates, subArrwithGivensum, tripletsumProb, pairSumProblem, longesubstringWithoutRepeaCh, minWindowSubstring, smallestSub } = require("./problems")
+const { maxSubarray, threesumClosest, removeDuplicates, subArrwithGivensum, tripletsumProb, pairSumProblem, longesubstringWithoutRepeaCh, minWindowSubstring, smallestSub, longestSubWithKDistinCh, allpermutations, subsets, nextGreaterElement, longestCommonPrefix, largestOddnumINastr, firstNonRepeatingCharacter } = require("./problems")
+
+
+const express = require("express");
+
+const app = express();
+
 
 
 // maxSubarray()
@@ -9,7 +15,14 @@ const { maxSubarray, threesumClosest, removeDuplicates, subArrwithGivensum, trip
 // pairSumProblem()
 // longesubstringWithoutRepeaCh()
 // minWindowSubstring()
-smallestSub()
+// smallestSub()
+// longestSubWithKDistinCh()
+// allpermutations()
+// subsets()
+// nextGreaterElement()
+// longestCommonPrefix()
+// largestOddnumINastr()
+firstNonRepeatingCharacter()
 
 
 

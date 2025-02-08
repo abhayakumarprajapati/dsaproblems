@@ -376,3 +376,220 @@ exports.smallestSub = () => {
 
     console.log(task())
 }
+
+
+//Longest Substring with K Distinct Characters
+
+// Input: s = "araaci", k = 2
+// Output: 4
+// 🔹 Approach: Expand the window while keeping track of character frequency, shrink when distinct characters exceed K.
+
+
+exports.longestSubWithKDistinCh = () => {
+
+    const task = (str, k) => {
+
+        let maxlen = 0;
+        let start = 0;
+
+        let charMap = new Map();
+
+
+        for (let end = 0; end < str.length; end++) {
+
+            let rightchar = str[end]
+            charMap.set(rightchar, (charMap.has(rightchar) || 0) + 1)
+
+            while (charMap.size > k) {
+
+                let leftchar = str[start];
+
+                charMap.set(leftchar, charMap.get(leftchar) - 1)
+
+                if (charMap.get(leftchar) == 0) {
+                    charMap.delete(leftchar)
+                }
+
+                start++
+
+
+            }
+
+            maxlen = Math.max(maxlen, end - start + 1)
+
+        }
+
+        return maxlen
+
+
+    }
+
+    console.log(task("araaci", 2)); // Output: 4
+    console.log(task("cbbebi", 3)); // Output: 5
+    console.log(task("abcde", 1));  // Output: 1
+
+}
+
+//permutations
+
+exports.allpermutations = () => {
+
+    const task = (p, up) => {
+
+        if (up == "") {
+            console.log(p)
+            return;
+        }
+
+        let ch = up.charAt(0);
+
+
+        for (let i = 0; i <= p.length; i++) {
+            let f = p.substring(0, i);
+            let s = p.substring(i);
+            task(f + ch + s, up.substring(1));
+        }
+
+
+    }
+
+    console.log(task("", "abc"))
+
+    console.log("xyz".substring(0))
+
+}
+
+exports.subsets = () => {
+
+    const task = (p, up) => {
+
+        if (up == '') {
+            console.log(p)
+            return;
+        }
+
+        let ch = up.charAt(0);
+
+        task(p + ch, up.substring(1))
+        task(p, up.substring(1))
+
+    }
+
+    console.log(task("", "abc"))
+
+}
+
+exports.nextGreaterElement = () => {
+
+    const task = (arr) => {
+
+        let n = arr.length;
+        let result = new Array(n).fill(-1);
+        let stack = [];
+
+        for (let i = n - 1; i >= 0; i--) {
+
+            while (stack.length > 0 && stack[stack.length - 1] <= arr[i]) {
+                stack.pop();
+            }
+
+            if (stack.length > 0) {
+                result[i] = stack[stack.length - 1];
+            }
+
+            stack.push(arr[i]);
+        }
+
+        return result
+
+    }
+
+    console.log(task([4, 5, 2, 10, 8]))
+}
+
+
+exports.longestCommonPrefix = () => {
+
+    const task = (strs) => {
+
+        let prefix = strs[0];
+
+        for (let i = 1; i < strs.length; i++) {
+
+            while (strs[i].indexOf(prefix) !== 0) {
+
+                prefix = prefix.slice(0, prefix.length - 1)
+
+                if (!prefix) return ""
+
+            }
+
+        }
+
+        return prefix;
+
+    }
+
+    console.log(task(["flower", "flow", "flight"])); // Output: "fl"
+    console.log(task(["dog", "racecar", "car"]));    // Output: ""
+    console.log(task(["interspecies", "interstellar", "interstate"])); // Output: "inters"
+    console.log(task(["apple", "ape", "april"]));    // Output: "ap"
+
+}
+
+exports.largestOddnumINastr = () => {
+
+    const task = (num) => {
+
+        for (let i = num.length - 1; i >= 0; i--) {
+
+            if (num[i] % 2 !== 0) {
+                return num.slice(0, i + 1)
+            }
+
+
+        }
+
+        return ''
+
+    }
+
+    console.log(task("35427"));  // Output: "35427"
+    console.log(task("4206"));   // Output: ""
+    console.log(task("42068"));  // Output: ""
+    console.log(task("123456789")); // Output: "123456789"
+    console.log(task("78964"));  // Output: "789"
+
+}
+
+exports.firstNonRepeatingCharacter = () => {
+
+    const task = (s) => {
+
+        let charCount = new Map();
+
+        for (const char of s) {
+
+            charCount.set(char, (charCount.get(char) || 0) + 1)
+        }
+
+        for (const char of s) {
+
+            if (charCount.get(char) == 1) {
+                return char
+            }
+
+        }
+
+        return "None";
+
+    }
+
+
+
+    console.log(task("leetcode")); // Output: "l"
+    console.log(task("aabb"));     // Output: "None"
+    console.log(task("swiss"));    // Output: "w"
+    console.log(task("abcabcde")); // Output: "d"
+
+}

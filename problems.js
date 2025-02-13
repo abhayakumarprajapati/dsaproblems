@@ -105,7 +105,7 @@ exports.subArrwithGivensum = () => {
     const task = () => {
 
         let arr = [1, 4, 20, 3, 10, 5];
-        let sorted = [1, 3, 4, 5, 10, 20]
+        
         let target = 33;
 
         let start = 0;
@@ -389,7 +389,7 @@ exports.longestSubWithKDistinCh = () => {
 
     const task = (str, k) => {
 
-        let maxlen = 0;
+        let maxlen =0;
         let start = 0;
 
         let charMap = new Map();
@@ -398,7 +398,8 @@ exports.longestSubWithKDistinCh = () => {
         for (let end = 0; end < str.length; end++) {
 
             let rightchar = str[end]
-            charMap.set(rightchar, (charMap.has(rightchar) || 0) + 1)
+           
+            charMap.set(rightchar, (charMap.get(rightchar) || 0) + 1)
 
             while (charMap.size > k) {
 
@@ -507,7 +508,7 @@ exports.nextGreaterElement = () => {
     console.log(task([4, 5, 2, 10, 8]))
 }
 
-
+//strings
 exports.longestCommonPrefix = () => {
 
     const task = (strs) => {
@@ -591,5 +592,102 @@ exports.firstNonRepeatingCharacter = () => {
     console.log(task("aabb"));     // Output: "None"
     console.log(task("swiss"));    // Output: "w"
     console.log(task("abcabcde")); // Output: "d"
+
+
+    console.log('abcde' + 'abcde')
+
+}
+
+
+exports.isAnagram = () => {
+
+    function task(s, t) {
+        if (s.length !== t.length) return false;
+
+        let count = {};
+
+        for (let char of s) {
+            count[char] = (count[char] || 0) + 1;
+        }
+
+        for (let char of t) {
+            if (!count[char]) return false;
+            count[char]--;
+        }
+
+        return true;
+    }
+
+    // Test cases
+    console.log(task("anagram", "nagaram")); // true
+    console.log(task("rat", "car")); // false
+
+
+}
+
+exports.reverseWord = () => {
+    function reverseWords(s) {
+        // return s.trim().split(/\s+/).reverse().join(' ');
+        return s.trim().split(/\s+/).reverse().join('')
+    }
+
+    // Test cases
+    console.log(reverseWords("the sky is blue"));        // "blue is sky the"
+    console.log(reverseWords("  hello world  "));       // "world hello"
+    console.log(reverseWords("a good   example"));      // "example good a"
+    console.log(reverseWords("  multiple   spaces  ")); // "spaces multiple"
+}
+
+//sort characters by frequency
+exports.sortch = () => {
+
+    const task = (str) => {
+
+        let charFreq = {};
+
+        for (let i = 0; i < str.length; i++) {
+
+            charFreq[str[i]] = (charFreq[str[i]] || 0) + 1;
+
+        }
+        console.log(charFreq)
+
+        console.log(Object.entries(charFreq))
+        console.log(Object.entries(charFreq).sort((a, b) => b[1] - a[1]))
+        console.log(Object.entries(charFreq).sort((a, b) => b[1] - a[1]).map(([char, freq]) => char.repeat(freq)))
+        console.log(Object.entries(charFreq).sort((a, b) => b[1] - a[1]).map(([char, freq]) => char.repeat(freq)).join(''))
+
+
+
+    }
+
+    console.log(task('tree'))
+
+}
+
+exports.secondLargest = () => {
+
+    const task = (arr) => {
+
+        let max = -Infinity;
+        let secondLargest = -Infinity;
+
+        for (let i = 0; i < arr.length; i++) {
+
+            if (arr[i] > max) {
+                secondLargest = max;
+                max = arr[i];
+            } else if (arr[i] > secondLargest && arr[i] !== max) {
+                secondLargest = arr[i]
+            }
+
+        }
+
+        return secondLargest === -Infinity ? null : secondLargest
+
+    }
+
+    // console.log(task([12, 35, 1, 10, 34, 1]))
+    console.log(task([10, 5, 10]))
 
 }

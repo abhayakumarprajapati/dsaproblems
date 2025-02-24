@@ -105,7 +105,7 @@ exports.subArrwithGivensum = () => {
     const task = () => {
 
         let arr = [1, 4, 20, 3, 10, 5];
-        
+
         let target = 33;
 
         let start = 0;
@@ -389,7 +389,7 @@ exports.longestSubWithKDistinCh = () => {
 
     const task = (str, k) => {
 
-        let maxlen =0;
+        let maxlen = 0;
         let start = 0;
 
         let charMap = new Map();
@@ -398,7 +398,7 @@ exports.longestSubWithKDistinCh = () => {
         for (let end = 0; end < str.length; end++) {
 
             let rightchar = str[end]
-           
+
             charMap.set(rightchar, (charMap.get(rightchar) || 0) + 1)
 
             while (charMap.size > k) {
@@ -689,5 +689,86 @@ exports.secondLargest = () => {
 
     // console.log(task([12, 35, 1, 10, 34, 1]))
     console.log(task([10, 5, 10]))
+
+}
+
+
+//new line added
+
+exports.twoSum = () => {
+
+    // Input: nums = [2, 7, 11, 15], target = 9
+    // Output: [0, 1]
+
+
+
+    const task = (nums, target) => {
+
+        let arr = nums.map((num, index) => ({ num, index })); // Store values with original indices
+        console.log('nums', arr)
+        arr.sort((a, b) => a.num - b.num); // Sort based on values
+        console.log('nums_1', arr)
+        let left = 0, right = arr.length - 1;
+
+        while (left < right) {
+            let sum = arr[left].num + arr[right].num;
+            if (sum === target) {
+                return [arr[left].index, arr[right].index];
+            } else if (sum < target) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+        return [];
+    }
+
+    let nums = [2, 18, 7, 15];
+    let target = 9;
+    console.log(task(nums, target))
+
+
+
+}
+
+//stack
+
+exports.validParentheses = () => {
+
+    const task = (str) => {
+
+        str = str.split('');
+        let stack = []
+
+        for (const ch of str) {
+            if (ch == '(' || ch == '[' || ch == '{') {
+                stack.push(ch)
+            } else {
+
+                if (stack.length == 0) {
+                    return false
+                }
+
+                let top = stack.pop();
+
+                if ((ch == ")" && top !== "(") || (ch == "]" && top !== "[") || (ch == "}" && top !== "{")) {
+                    return false;
+                }
+
+
+
+            }
+        }
+
+        return stack.length == 0
+
+
+    }
+
+    console.log(task("()"));        // true
+    console.log(task("()[]{}"));    // true
+    console.log(task("(]"));        // false
+    console.log(task("([)]"));      // false
+    console.log(task("{[]}"));      // true
 
 }

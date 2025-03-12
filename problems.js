@@ -735,33 +735,63 @@ exports.twoSum = () => {
 
 exports.validParentheses = () => {
 
+    // const task = (str) => {
+
+    //     str = str.split('');
+    //     let stack = []
+
+    //     for (const ch of str) {
+    //         if (ch == '(' || ch == '[' || ch == '{') {
+    //             stack.push(ch)
+    //         } else {
+
+    //             if (stack.length == 0) {
+    //                 return false
+    //             }
+
+    //             let top = stack.pop();
+
+    //             if ((ch == ")" && top !== "(") || (ch == "]" && top !== "[") || (ch == "}" && top !== "{")) {
+    //                 return false;
+    //             }
+
+
+
+    //         }
+    //     }
+
+    //     return stack.length == 0
+
+
+    // }
+
     const task = (str) => {
 
-        str = str.split('');
-        let stack = []
+        let stack = [];
 
-        for (const ch of str) {
-            if (ch == '(' || ch == '[' || ch == '{') {
-                stack.push(ch)
+        str = str.split(' ');
+
+        for (let i = 0; i < str.length; i++) {
+
+            if (str[i] == "(" || str[i] == "{" || str[i] == "[") {
+                stack.push(str[i])
             } else {
-
                 if (stack.length == 0) {
-                    return false
+                    return false;
                 }
 
                 let top = stack.pop();
 
-                if ((ch == ")" && top !== "(") || (ch == "]" && top !== "[") || (ch == "}" && top !== "{")) {
+                if ((str[i] == ")" && top !== "(") || (str[i] == "]" && top !== "[") || (str[i] == "}" && top !== "{")) {
+
                     return false;
+
                 }
-
-
-
             }
+
         }
 
-        return stack.length == 0
-
+        return stack.length == 0;
 
     }
 

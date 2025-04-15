@@ -1732,5 +1732,42 @@ exports.numofsub_brute = () => {
 
 
 
-//ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIw1ZbEJ84510vs7Ae1wzEAnO2IMPK9BiIn5DDDORPKw abhayprajapati1000@gmail.com
+    //ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIw1ZbEJ84510vs7Ae1wzEAnO2IMPK9BiIn5DDDORPKw abhayprajapati1000@gmail.com
+}
+
+
+//1358 . Number of substrings containing all three characters
+
+exports.numberOfSubstrings = () => {
+
+    // Input: s = "abcabc"
+    // Output: 10
+    // Explanation: The substrings containing at least one occurrence of the characters a, b and c are "abc", "abca", "abcab", "abcabc", "bca", "bcab", "bcabc", "cab", "cabc" and "abc" (again). 
+
+    const task = () => {
+
+        let s = "abcabc";
+
+        let count = { a: 0, b: 0, c: 0 }; // frequency map for a, b, c
+        let left = 0;
+        let result = 0;
+
+        for (let right = 0; right < s.length; right++) {
+            count[s[right]]++; // include character at right
+
+            // check if current window has at least one a, b, and c
+            while (count.a > 0 && count.b > 0 && count.c > 0) {
+                result += s.length - right; // count all valid substrings from left to end
+                count[s[left]]--; // shrink window from the left
+                left++;
+            }
+        }
+
+        return result;
+
+
+    }
+
+    console.log(task())
+
 }

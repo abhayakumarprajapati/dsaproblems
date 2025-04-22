@@ -146,6 +146,7 @@ exports.tripletsumProb = () => {
 
         arr.sort((a, b) => a - b);
         let result = [];
+        console.log('arr: ', arr)
 
         for (let i = 0; i < arr.length - 2; i++) {
             // Skip duplicates for the first element of the triplet
@@ -188,6 +189,7 @@ exports.pairSumProblem = () => {
         let arr = [1, 4, 2, 3, 5, -1, 0];
         let target = 4;
         arr.sort((a, b) => a - b)
+        console.log('arr: ', arr)
 
         let start = 0, end = arr.length - 1;
         let result = []
@@ -222,6 +224,7 @@ exports.longesubstringWithoutRepeaCh = () => {
     function lengthOfLongestSubstring(s) {
         let charSet = new Set();
         let start = 0, maxLength = 0;
+        let maxStart = 0; // To track the start index of the longest substring
 
         for (let end = 0; end < s.length; end++) {
             // If character already in set, remove characters from start
@@ -232,16 +235,25 @@ exports.longesubstringWithoutRepeaCh = () => {
 
             // Add current character to set and update maxLength
             charSet.add(s[end]);
-            maxLength = Math.max(maxLength, end - start + 1);
+            // maxLength = Math.max(maxLength, end - start + 1);
+            // Update maxLength and track the start of the substring
+            if (end - start + 1 > maxLength) {
+                maxLength = end - start + 1;
+                maxStart = start;
+            }
         }
 
-        return maxLength;
+
+        const longestSubstring = s.substring(maxStart, maxStart + maxLength);
+        return { maxLength, longestSubstring };
     }
 
     // Example usage:
     // const s = "abcabcdbb";
     const s = "abcbbabcde";
-    console.log(lengthOfLongestSubstring(s)); // Output: 3 (Substring: "abc")
+    const result = lengthOfLongestSubstring(s);
+    console.log("Length:", result.maxLength);
+    console.log("Substring:", result.longestSubstring);// Output: 3 (Substring: "abc")
 
 }
 
@@ -269,8 +281,6 @@ exports.minWindowSubstring = () => {
             // Add character at `end` to the window
             const char = s[end];
             windowFreq.set(char, (windowFreq.get(char) || 0) + 1);
-
-
 
             if (tFreq.has(char) && windowFreq.get(char) === tFreq.get(char)) {
                 formed++;
@@ -453,7 +463,7 @@ exports.allpermutations = () => {
 
     console.log(task("", "abc"))
 
-    console.log("xyz".substring(0))
+    // console.log("xyz".substring(0))
 
 }
 
@@ -1230,7 +1240,7 @@ exports.finalPrices = () => {
     console.log(finalprice(arr)); // Output: [5, 10, 10, -1, -1]
 }
 
-
+//402 remove k digits // stack and queues
 
 exports.removekdigits = () => {
 
@@ -1291,11 +1301,42 @@ exports.removekdigits = () => {
         // Example Usage
 
         console.log(removeKDigitsBruteForce("1432219", 3)); // Output: "1219"
+        // console.log("1432219".slice(1))
 
     }
 
     console.log(task())
 
+
+}
+
+exports.removekdigits_optimise = () => {
+
+    function removeKdigits(num, k) {
+        const stack = [];
+
+        for (let digit of num) {
+            while (k > 0 && stack.length && stack[stack.length - 1] > digit) {
+                stack.pop();
+                k--;
+            }
+            stack.push(digit);
+        }
+
+        // Remove remaining k digits from the end
+        while (k > 0) {
+            stack.pop();
+            k--;
+        }
+
+        // Convert to string and remove leading zeros
+        let result = stack.join('').replace(/^0+/, '');
+
+        return result === '' ? '0' : result;
+    }
+
+
+    console.log(removeKdigits("1432219", 3));  // "1219"
 
 }
 
@@ -1771,5 +1812,395 @@ exports.numberOfSubstrings = () => {
     console.log(task())
 
     //comment added
+
+}
+
+function generateSubarr(arr) {
+
+    let subarrays = [];
+
+    // Subarrays are [3], [1], [2], [4], [3,1], [1,2], [2,4], [3,1,2], [1,2,4], [3,1,2,4]. 
+
+    for (let i = 0; i < arr.length; i++) {
+
+        for (let j = i + 1; j <= arr.length; j++) {
+
+            // console.log(arr.slice(i, j))
+            subarrays.push(arr.slice(i, j))
+
+        }
+
+    }
+
+    return subarrays;
+}
+
+
+exports.sumSubarrayMins = () => {
+
+    function sumSubarrayMins(arr) {
+        const n = arr.length;
+        const mod = 1e9 + 7;
+
+        const prevSmaller = new Array(n).fill(-1);
+        const nextSmaller = new Array(n).fill(n);
+
+        const stack1 = [];
+        const stack2 = [];
+
+        // Find previous smaller elements
+        for (let i = 0; i < n; i++) {
+            while (stack1.length && arr[stack1[stack1.length - 1]] > arr[i]) {
+                stack1.pop();
+            }
+            prevSmaller[i] = stack1.length ? stack1[stack1.length - 1] : -1;
+            stack1.push(i);
+        }
+
+        // Find next smaller elements
+        for (let i = n - 1; i >= 0; i--) {
+            while (stack2.length && arr[stack2[stack2.length - 1]] >= arr[i]) {
+                stack2.pop();
+            }
+            nextSmaller[i] = stack2.length ? stack2[stack2.length - 1] : n;
+            stack2.push(i);
+        }
+
+        // Calculate result
+        let result = 0;
+        for (let i = 0; i < n; i++) {
+            const leftCount = i - prevSmaller[i];
+            const rightCount = nextSmaller[i] - i;
+            const totalSubarrays = leftCount * rightCount;
+            result = (result + arr[i] * totalSubarrays) % mod;
+        }
+
+        return result;
+    }
+
+    // Example usage:
+    const arr = [3, 1, 2, 4];
+    console.log(sumSubarrayMins(arr)); // Output: 17
+
+
+}
+
+exports.NGE = () => {
+    function nextGreaterElements(arr) {
+        const n = arr.length;
+        const res = new Array(n).fill(-1);
+        const stack = [];
+
+        for (let i = 0; i < n; i++) {
+            while (stack.length && arr[i] > arr[stack[stack.length - 1]]) {
+                const idx = stack.pop();
+                res[idx] = arr[i];
+            }
+            stack.push(i);
+        }
+
+        return res;
+    }
+
+    // Example
+    console.log(nextGreaterElements([2, 1, 3, 4])); // Output: [3, 3, 4, -1]
+
+}
+
+exports.NSE = () => {
+    function nextSmallerElements(arr) {
+        const n = arr.length;
+        const res = new Array(n).fill(-1);
+        const stack = [];
+
+        for (let i = 0; i < n; i++) {
+            while (stack.length && arr[i] < arr[stack[stack.length - 1]]) {
+                const idx = stack.pop();
+                res[idx] = arr[i];
+            }
+            stack.push(i);
+        }
+
+        return res;
+    }
+
+    // Example
+    console.log(nextSmallerElements([2, 1, 3, 4])); // Output: [1, -1, -1, -1]
+
+}
+
+exports.PSE = () => {
+    function previousSmallerElements(arr) {
+        const n = arr.length;
+        const res = new Array(n).fill(-1);
+        const stack = []; // stack will store indices
+
+        for (let i = 0; i < n; i++) {
+            while (stack.length && arr[stack[stack.length - 1]] >= arr[i]) {
+                stack.pop();
+            }
+
+            res[i] = stack.length ? arr[stack[stack.length - 1]] : -1;
+            stack.push(i);
+        }
+
+        return res;
+    }
+
+    // Example
+    console.log(previousSmallerElements([3, 7, 1, 7, 8, 4]));
+    // Output: [-1, 3, -1, 1, 7, 1]
+
+}
+
+exports.PGE = () => {
+    function previousGreaterElements(arr) {
+        const n = arr.length;
+        const res = new Array(n).fill(-1);
+        const stack = [];
+
+        for (let i = 0; i < n; i++) {
+            while (stack.length && arr[stack[stack.length - 1]] <= arr[i]) {
+                stack.pop();
+            }
+
+            res[i] = stack.length ? arr[stack[stack.length - 1]] : -1;
+            stack.push(i);
+        }
+
+        return res;
+    }
+
+    // Example
+    console.log(previousGreaterElements([3, 7, 1, 7, 8, 4]));
+    // Output: [-1, -1, 7, -1, -1, 8]
+
+}
+
+function isValid_1(substr, t) {
+
+    const windowfreq = {};
+    const targetfreq = {};
+
+    for (let char of substr) {
+
+        windowfreq[char] = (windowfreq[char] || 0) + 1;
+
+    }
+
+    for (let char of t) {
+        targetfreq[char] = (targetfreq[char] || 0) + 1;
+    }
+
+
+    for (let char in targetfreq) {
+
+        if (!windowfreq[char] || windowfreq[char] < targetfreq[char]) {
+
+            return false;
+
+        }
+
+    }
+    return true;
+}
+
+exports.minWindowSubstring_brute = () => {
+    const task = () => {
+
+        let str = "ADOBECODEBANC";
+        let t = "ABC";
+
+        if (t.length > str.length) {
+            return "";
+        }
+
+        let minlen = Infinity;
+        let result = "";
+
+        for (let start = 0; start < str.length; start++) {
+
+            for (let end = start + 1; end <= str.length; end++) {
+
+                const substr = str.slice(start, end);
+
+                if (isValid_1(substr, t) && substr.length < minlen) {
+
+                    minlen = substr.length;
+                    result = substr
+
+                }
+
+            }
+
+        }
+
+        return result;
+
+
+
+    }
+
+    console.log(task())
+}
+
+//215. Kth largest element in an array
+exports.findKthLargest = () => {
+
+    const task = () => {
+
+        let list = [];
+
+        // const input = [3, 2, 3, 1, 2, 4, 5, 5, 6];
+        // input.forEach(insert);
+
+        function insert(value) {
+            list.push(value);
+            upheap(list.length - 1);
+        }
+
+        function parent(index) {
+            return Math.floor((index - 1) / 2);
+        }
+
+        function swap(first, second) {
+            let temp = list[first];
+            list[first] = list[second];
+            list[second] = temp;
+        }
+
+        function upheap(index) {
+            let p = parent(index);
+            if (index > 0 && list[index] < list[p]) {
+                swap(index, p);
+                upheap(p);
+            }
+        }
+
+        function left(index) {
+            return 2 * index + 1;
+        }
+
+        function right(index) {
+            return 2 * index + 2;
+        }
+
+        function downheap(idx) {
+            let min = idx;
+            let lef = left(idx);
+            let righ = right(idx);
+
+            if (lef < list.length && list[min] > list[lef]) {
+                min = lef;
+            }
+
+            if (righ < list.length && list[min] > list[righ]) {
+                min = righ;
+            }
+
+            if (min !== idx) {
+                swap(min, idx);
+                downheap(min);
+            }
+        }
+
+        function remove() {
+            if (list.length === 0) {
+                console.log('empty heap removing');
+                return undefined;
+            }
+
+            let temp = list[0];
+            //rebalancing tree so that min comes at top
+            let last = list.pop();
+
+            if (list.length !== 0) {
+                list[0] = last;
+                downheap(0);
+            }
+
+            return temp;
+        }
+
+        function heapSort() {
+            let data = [];
+            while (list.length !== 0) {
+                data.push(remove());
+            }
+            return data;
+        }
+
+        insert(5)
+        insert(7)
+        insert(9)
+        insert(8)
+        insert(11)
+        insert(12)
+        insert(13)
+        insert(10)
+
+        console.log(list)
+
+        // let data = heapSort();
+
+        // console.log(data);
+
+        // console.log(list)
+
+        console.log(remove())
+        console.log(remove())
+        console.log(remove())
+        console.log(remove())
+        console.log(remove())
+        console.log(remove())
+
+
+    }
+
+    console.log(task())
+
+
+    // console.log(task()); // now this logs the actual sorted array
+
+}
+
+//75 Sort colors : array
+
+exports.sortColors = () => {
+
+    const task = () => {
+        let nums = [1, 1, 0, 2, 0, 2];
+
+        let low = 0; //  keeps track of where to put the next 0
+        let mid = 0; //  your current element being evaluated
+        let high = nums.length - 1; //  keeps track of where to put the next 2
+
+        while (mid <= high) {
+
+
+            if (nums[mid] == 0) { //swap with nums[low], and move both low and mid forward.
+                let temp = nums[mid];
+                nums[mid] = nums[low];
+                nums[low] = temp;
+
+                low++;
+                mid++;
+
+            } else if (nums[mid] == 1) { // it's already in the right place, just move mid forward.
+                mid++;
+            } else if (nums[mid] == 2) { //swap with nums[high] and move high backward only (don’t move mid yet,because the swapped-in element needs to be evaluated
+                let temp = nums[mid];
+                nums[mid] = nums[high];
+                nums[high] = temp;
+
+                high--;
+            }
+
+        }
+        console.log(nums)
+
+    }
+
+    task()
 
 }

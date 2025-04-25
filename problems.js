@@ -2167,7 +2167,7 @@ exports.findKthLargest = () => {
 //75 Sort colors : array
 
 exports.sortColors = () => {
-
+    //Dutch National Flag algorithm 
     const task = () => {
         let nums = [1, 1, 0, 2, 0, 2];
 
@@ -2176,7 +2176,6 @@ exports.sortColors = () => {
         let high = nums.length - 1; //  keeps track of where to put the next 2
 
         while (mid <= high) {
-
 
             if (nums[mid] == 0) { //swap with nums[low], and move both low and mid forward.
                 let temp = nums[mid];
@@ -2203,4 +2202,60 @@ exports.sortColors = () => {
 
     task()
 
+}
+
+
+exports.rotate = () => {
+
+    let arr = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+    let n = arr.length;
+
+    //Output: [[7,4,1],[8,5,2],[9,6,3]]
+
+    // let result = []
+
+    // const task = () => {
+
+    //     for (let i = 0; i < arr.length; i++) {
+    //         let temparr = [];
+    //         for (let j = arr[i].length - 1; j >= 0 ; j--) {
+
+    //             temparr.push(arr[j][i])
+
+    //         }
+
+    //         result.push(temparr)
+
+    //     }
+
+    //     return result;
+
+    // }
+
+    // console.log(task())
+
+    //The function modifies the matrix in-place it does not create a copy or use any additional data structures that scale with input size.
+
+    //A few variables (temp, loop counters) are used, but they take constant space regardless of the matrix size.
+
+    const task = () => {
+
+        for (let i = 0; i < n; i++) {
+            for (let j = i + 1; j < n; j++) {
+                let temp = arr[i][j];
+                arr[i][j] = arr[j][i];
+                arr[j][i] = temp;
+            }
+        }
+
+        for (let j = 0; j < n; j++) {
+            arr[j].reverse()
+
+        }
+
+        return arr;
+
+    }
+
+    console.log(task())
 }

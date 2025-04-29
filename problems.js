@@ -1,10 +1,14 @@
+
+// 53 Maximum subarray
+
+//used kadane algorithm
+
 exports.maxSubarray = () => {
 
     const maxsubarr = () => {
 
-        // let arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-        // let arr = [1];
-        let arr = [5, 4, -1, 17, 8];
+
+        let arr = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
         let currentsum = 0;
         let maxsum = -Infinity;
 
@@ -24,6 +28,8 @@ exports.maxSubarray = () => {
     console.log(maxsubarr())
 
 }
+
+// 16 3sumclosest
 
 exports.threesumClosest = () => {
 
@@ -72,6 +78,8 @@ exports.threesumClosest = () => {
     // console.log(task(nums = [0, 0, 0], target = 1))
 
 }
+
+//26 Remove duplicates from sorted array
 
 exports.removeDuplicates = () => {
     const remove = () => {
@@ -139,9 +147,12 @@ exports.subArrwithGivensum = () => {
 
 }
 
+
+//15  3Sum
+
 exports.tripletsumProb = () => {
     const task_1 = () => {
-        let arr = [-1, 0, 1, 2, -1, -4];
+        let arr = [-1, 0, 1, 2, -1,-1, -4];
         let target = 0;
 
         arr.sort((a, b) => a - b);
@@ -257,7 +268,7 @@ exports.longesubstringWithoutRepeaCh = () => {
 
 }
 
-//Problem: Minimum Window Substring
+//Problem: 76 Minimum Window Substring
 
 exports.minWindowSubstring = () => {
     // const s = "ADOBECODEBANC";
@@ -320,7 +331,7 @@ exports.minWindowSubstring = () => {
 }
 
 
-//Maximum Sum Subarray of Size K
+// 2461 Maximum Sum Subarray of Size K
 //Input: arr = [2, 1, 5, 1, 3, 2], k = 3
 //Output: 9
 
@@ -352,7 +363,7 @@ exports.maxsubArrofSizeK = () => {
 
 }
 
-//Smallest Subarray with Sum ≥ S
+// 209 Smallest Subarray with Sum ≥ S
 exports.smallestSub = () => {
 
     const task = () => {
@@ -847,6 +858,8 @@ exports.Twosum2_inputarrissorted = () => {
 
 }
 
+
+
 exports.numofsubarrays = () => {
 
     const task = () => {
@@ -861,6 +874,8 @@ exports.numofsubarrays = () => {
                 arr[i] = 0;
             }
         }
+
+        console.log(arr)
 
         let obj = new Map();
         obj.set(0, 1);
@@ -2204,6 +2219,7 @@ exports.sortColors = () => {
 
 }
 
+//48 rotate image =>array
 
 exports.rotate = () => {
 

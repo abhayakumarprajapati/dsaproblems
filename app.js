@@ -16,7 +16,7 @@ const app = express();
 // longesubstringWithoutRepeaCh()
 // minWindowSubstring()
 // smallestSub()
-// longestSubWithKDistinCh()
+longestSubWithKDistinCh()
 // allpermutations()
 // subsets()
 // nextGreaterElement()
@@ -58,7 +58,7 @@ const app = express();
 
 // removekdigits_optimise()
 // findKthLargest()
-sortColors()
+// sortColors()
 // rotate()
 
 console.log('Hello world')

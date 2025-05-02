@@ -1,0 +1,380 @@
+{
+    "info": {
+        "_postman_id": "cc45a563-a97b-47e9-a5bc-b756008ed928",
+        "name": "Video Consent Live",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "42846949",
+        "_collection_link": "https://gaincafe-7551.postman.co/workspace/d657bb16-0dfb-4968-ac09-d7d0999c958d/collection/42846949-cc45a563-a97b-47e9-a5bc-b756008ed928?action=share&source=collection_link&creator=42846949"
+    },
+    "item": [
+        {
+            "name": "Login",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"email\": \"ray@gaincafe.com\",\n  \"password\": \"rjrj@1234\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/login",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "login"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Registration",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"Jane Doe\",\n  \"email\": \"jane@example.com\",\n  \"password\": \"secret123\",\n  \"password_confirmation\": \"secret123\"\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/register",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "register"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Contact Create",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "3|Oc5thBNTMdbdiQEECcFAyvNL2RQZxBvh35YN7mKO3645476a",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"first_name\": \"John New\",\n  \"last_name\": \"Doe\",\n  \"email\": \"john@example.com\",\n  \"phone_number\": \"9876543210\",\n  \"company\": \"Acme Corp\",\n  \"user_id\": 2\n}\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contacts",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contacts"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "List Contacts",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "3|Oc5thBNTMdbdiQEECcFAyvNL2RQZxBvh35YN7mKO3645476a",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contacts",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contacts"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "SIngle Contact Listing",
+            "protocolProfileBehavior": {
+                "disableBodyPruning": true
+            },
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "7|JO9AeSdnHPncnYR5RqpNn0Uea3hGxOsKcc0Wj9QO63ce3e76",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contacts/1",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contacts",
+                        "1"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Update Contact",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "7|JO9AeSdnHPncnYR5RqpNn0Uea3hGxOsKcc0Wj9QO63ce3e76",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"first_name\": \"John New\",\n  \"last_name\": \"Test\",\n  \"email\": \"john.doe@example.com\",\n  \"phone_number\": \"9876543210\",\n  \"company\": \"Acme Corp\",\n  \"user_id\": 1\n}\n",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contacts/1",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contacts",
+                        "1"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Create Contact List",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "7|JO9AeSdnHPncnYR5RqpNn0Uea3hGxOsKcc0Wj9QO63ce3e76",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n  \"name\": \"Follow-up Care\",\n  \"description\": \"Patients requiring follow-up appointments\",\n  \"user_id\": 1\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contact-lists",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contact-lists"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "Add contact to list",
+            "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contact-lists/{list_id}/contacts",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contact-lists",
+                        "{list_id}",
+                        "contacts"
+                    ]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "http://consentai.test/api/contact-lists/1/contacts",
+            "request": {
+                "auth": {
+                    "type": "bearer",
+                    "bearer": [
+                        {
+                            "key": "token",
+                            "value": "7|JO9AeSdnHPncnYR5RqpNn0Uea3hGxOsKcc0Wj9QO63ce3e76",
+                            "type": "string"
+                        }
+                    ]
+                },
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": " \"contact_ids\":1",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "https://consentai.gaincafe.com/api/contact-lists/1/contacts",
+                    "protocol": "https",
+                    "host": [
+                        "consentai",
+                        "gaincafe",
+                        "com"
+                    ],
+                    "path": [
+                        "api",
+                        "contact-lists",
+                        "1",
+                        "contacts"
+                    ]
+                }
+            },
+            "response": []
+        }
+    ]
+}

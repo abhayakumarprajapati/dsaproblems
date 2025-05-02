@@ -152,7 +152,7 @@ exports.subArrwithGivensum = () => {
 
 exports.tripletsumProb = () => {
     const task_1 = () => {
-        let arr = [-1, 0, 1, 2, -1,-1, -4];
+        let arr = [-1, 0, 1, 2, -1, -1, -4];
         let target = 0;
 
         arr.sort((a, b) => a - b);
@@ -443,13 +443,13 @@ exports.longestSubWithKDistinCh = () => {
 
     }
 
-    console.log(task("araaci", 2)); // Output: 4
+    // console.log(task("araaci", 2)); // Output: 4
     console.log(task("cbbebi", 3)); // Output: 5
-    console.log(task("abcde", 1));  // Output: 1
+    // console.log(task("abcde", 1));  // Output: 1
 
 }
 
-//permutations
+//46 permutations
 
 exports.allpermutations = () => {
 
@@ -477,6 +477,8 @@ exports.allpermutations = () => {
     // console.log("xyz".substring(0))
 
 }
+
+// 78 Subsets
 
 exports.subsets = () => {
 
@@ -523,8 +525,8 @@ exports.nextGreaterElement = () => {
 
     }
 
-    // console.log(task([4, 5, 2, 10, 8]))
-    console.log(task([1, 2, 1]))
+    console.log(task([4, 5, 2, 10, 8]))
+    // console.log(task([1, 2, 1]))
 }
 
 //strings
@@ -607,16 +609,17 @@ exports.firstNonRepeatingCharacter = () => {
 
 
 
-    console.log(task("leetcode")); // Output: "l"
-    console.log(task("aabb"));     // Output: "None"
+    // console.log(task("leetcode")); // Output: "l"
+    // console.log(task("aabb"));     // Output: "None"
     console.log(task("swiss"));    // Output: "w"
-    console.log(task("abcabcde")); // Output: "d"
+    // console.log(task("abcabcde")); // Output: "d"
 
 
-    console.log('abcde' + 'abcde')
+    // console.log('abcde' + 'abcde')
 
 }
 
+// 242 Valid anagram
 
 exports.isAnagram = () => {
 
@@ -639,8 +642,7 @@ exports.isAnagram = () => {
 
     // Test cases
     console.log(task("anagram", "nagaram")); // true
-    console.log(task("rat", "car")); // false
-
+    console.log(task("rat", "tar")); // false
 
 }
 
@@ -675,8 +677,6 @@ exports.sortch = () => {
         console.log(Object.entries(charFreq).sort((a, b) => b[1] - a[1]))
         console.log(Object.entries(charFreq).sort((a, b) => b[1] - a[1]).map(([char, freq]) => char.repeat(freq)))
         console.log(Object.entries(charFreq).sort((a, b) => b[1] - a[1]).map(([char, freq]) => char.repeat(freq)).join(''))
-
-
 
     }
 
@@ -751,6 +751,8 @@ exports.twoSum = () => {
 }
 
 //stack
+
+// 20 Valid Parentheses
 
 exports.validParentheses = () => {
 
@@ -859,6 +861,7 @@ exports.Twosum2_inputarrissorted = () => {
 }
 
 
+// 1248 Count Number of Nice Subarrays
 
 exports.numofsubarrays = () => {
 
@@ -1005,7 +1008,7 @@ exports.removeduplicatesletters_optimised = () => {
     function removeDuplicateLetters(s) {
         let stack = [];
         let seen = new Set();
-        console.log('set', seen)
+        // console.log('set', seen)
         let lastOccurrence = {};
 
         // Step 1: Store the last index of each character
@@ -1021,6 +1024,7 @@ exports.removeduplicatesletters_optimised = () => {
 
             // Skip if already in the stack
             if (seen.has(char)) continue;
+
 
             // Step 3: Remove elements from stack if they appear later in the string and are greater
             while (stack.length > 0 && stack[stack.length - 1] > char && lastOccurrence[stack[stack.length - 1]] > i) {
@@ -1251,7 +1255,7 @@ exports.finalPrices = () => {
     }
 
     // Example Usage
-    let arr = [1, 2, 3, 4, 5];
+    let arr = [8, 4, 6, 2, 3];
     console.log(finalprice(arr)); // Output: [5, 10, 10, -1, -1]
 }
 
@@ -1325,6 +1329,8 @@ exports.removekdigits = () => {
 
 }
 
+//402 Remove K digits
+
 exports.removekdigits_optimise = () => {
 
     function removeKdigits(num, k) {
@@ -1385,8 +1391,10 @@ exports.beautySum = () => {
     const task = () => {
 
         // let str = "aabcb";
-        let str = "aabcbaa";
+        let str = "abcd";
         const substrings = getSubstrings(str)
+
+        console.log(substrings)
 
         let sum = 0;
 
@@ -1406,7 +1414,7 @@ exports.beautySum = () => {
 
                 }
 
-                console.log("lettercounts: ", lettercounts)
+                // console.log("lettercounts: ", lettercounts)
 
 
 
@@ -1552,31 +1560,17 @@ exports.maxDepth = () => {
         for (let ch of str) {
 
             if (ch == "(") {
-
                 curr = curr + 1;
-
                 if (curr > max) {
                     max = curr
                 }
-
             } else if (ch == ")") {
-
                 curr = curr - 1;
-
-
-
             }
-
         }
-
         return max;
-
-
     }
-
-
     console.log(task())
-
 }
 
 //451 sort characters by frequency
@@ -1850,6 +1844,7 @@ function generateSubarr(arr) {
     return subarrays;
 }
 
+//907 sum of subarray minimums
 
 exports.sumSubarrayMins = () => {
 
@@ -2060,6 +2055,7 @@ exports.minWindowSubstring_brute = () => {
 }
 
 //215. Kth largest element in an array
+
 exports.findKthLargest = () => {
 
     const task = () => {
@@ -2270,6 +2266,25 @@ exports.rotate = () => {
         }
 
         return arr;
+
+    }
+
+    console.log(task())
+}
+
+
+exports.setexample = () => {
+    const task = () => {
+
+        const set = new Set();
+
+        set.add('a')
+        set.add('b')
+        set.add('c')
+        set.add('c')
+
+        console.log(set)
+        console.log(set.has('c'))
 
     }
 
